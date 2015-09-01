@@ -1,0 +1,451 @@
+/* COLORS */
+/* BREAKPOINTS */
+.navbar-icon {
+  background-color: transparent;
+  border: 0;
+  display: block;
+  float: right;
+  margin: 0;
+  outline: none;
+  padding: 11px 0;
+  position: relative;
+}
+.navbar-icon .icon-bar {
+  background-color: #fff;
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+}
+.navbar-icon .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+button.navbar-icon {
+  padding: 18px;
+}
+
+.header_avatar {
+  border: none;
+  float: left;
+  height: 1.875em;
+  overflow: hidden;
+  width: auto;
+}
+.JS-sidr .header_avatar {
+  float: none;
+  height: 24px;
+  margin-bottom: -2px;
+}
+
+.identity_bar button {
+  cursor: pointer;
+}
+
+.navbar-toggle-narrow .header_avatar {
+  border: none;
+  float: left;
+  height: 3.2em;
+  overflow: hidden;
+  width: auto;
+}
+
+.identity_bar button {
+  cursor: pointer;
+}
+
+.navbar-toggle-narrow {
+  display: none;
+  background-color: #232326;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  width: 300px;
+  z-index: 1001;
+  -moz-box-shadow: 5px 0px 20px black inset;
+  -webkit-box-shadow: 5px 0px 20px black inset;
+  box-shadow: 5px 0px 20px black inset;
+}
+
+/*
+    Sidr is the plugin used to show the side nav menu.
+    The "sidr" class is added by the plugin.
+*/
+.sidr {
+  background: #232326;
+  border-left: 1px solid #000;
+  color: #FFF;
+  display: none;
+  font-family: Din, Helvetica, Arial, sans-serif;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 255px;
+  z-index: 999999;
+  -moz-box-shadow: inset 5px 0 10px 0 #0b0b0b;
+  -webkit-box-shadow: inset 5px 0 10px 0 #0b0b0b;
+  box-shadow: inset 5px 0 10px 0 #0b0b0b;
+}
+.sidr .sidr-inner {
+  padding: 0 0 15px;
+}
+.sidr .sidr-inner > p {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.sidr.right {
+  left: auto;
+  right: -255px;
+}
+.sidr.left {
+  left: -255px;
+  right: auto;
+  -moz-box-shadow: inset -5px 0 10px 0 #0b0b0b;
+  -webkit-box-shadow: inset -5px 0 10px 0 #0b0b0b;
+  box-shadow: inset -5px 0 10px 0 #0b0b0b;
+}
+.sidr h4 {
+  margin: 1.33em 0;
+}
+.sidr p {
+  margin: 0 0 12px;
+}
+.sidr p a {
+  color: rgba(255, 255, 255, 0.9);
+}
+.sidr > p {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.sidr ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.sidr ul li {
+  border-bottom: 1px solid #0b0b0b;
+  display: block;
+  margin: 0;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -moz-box-shadow: 0 2px 0 0 #28282b;
+  -webkit-box-shadow: 0 2px 0 0 #28282b;
+  box-shadow: 0 2px 0 0 #28282b;
+}
+.sidr ul li:hover:not(.navbar-footer), .sidr ul li.active:not(.navbar-footer), .sidr ul li.sidr-class-active:not(.navbar-footer) {
+  background: #151517;
+}
+.sidr ul li.indented {
+  padding-left: 20px;
+}
+.sidr ul li a, .sidr ul li span {
+  color: #FFF;
+  text-decoration: none;
+}
+.sidr ul li a {
+  display: block;
+  padding: 14px 20px 10px 20px;
+}
+.sidr ul li span.number-label {
+  background: #b7602c;
+  display: inline-block;
+  font-size: .8em;
+  margin-right: 10px;
+  padding: 4px 6px 2px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.sidr ul li.navbar-narrow-profile {
+  overflow: hidden;
+  padding: 20px;
+}
+.sidr ul li.navbar-narrow-profile .name {
+  font-size: 1.1em;
+  margin: 0;
+  padding: .1em 0 .5em;
+  float: right;
+  width: 147px;
+  word-wrap: break-word;
+}
+.sidr ul li.navbar-narrow-profile .links {
+  border-top: 1px solid #333;
+}
+.sidr ul li.navbar-narrow-profile .links a {
+  color: #9c9c9c;
+  float: left;
+  font-size: .8em;
+  margin: 0;
+  padding: .75em 0 0;
+  width: 50%;
+}
+.sidr ul li.navbar-narrow-profile .links a:hover, .sidr ul li.navbar-narrow-profile .links a:focus {
+  color: #fff;
+}
+.sidr ul li.navbar-footer {
+  border-bottom: 0;
+  color: #9b9b9b;
+  font-size: .8em;
+  padding: 20px;
+  -moz-box-shadow: 0 0 0 0 #333333;
+  -webkit-box-shadow: 0 0 0 0 #333333;
+  box-shadow: 0 0 0 0 #333333;
+}
+.sidr ul li ul {
+  border-bottom: 0;
+  margin: 0;
+}
+.sidr ul li ul li {
+  font-size: -1em;
+}
+.sidr ul li ul li:hover > a, .sidr ul li ul li:hover > span, .sidr ul li ul li.active > a, .sidr ul li ul li.active > span, .sidr ul li ul li.sidr-class-active > a, .sidr ul li ul li.sidr-class-active > span {
+  -moz-box-shadow: inset 0 0 15px 3px #0b0b0b;
+  -webkit-box-shadow: inset 0 0 15px 3px #0b0b0b;
+  box-shadow: inset 0 0 15px 3px #0b0b0b;
+}
+.sidr ul li ul li a, .sidr ul li ul li span {
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 30px;
+}
+.sidr form {
+  margin: 0 15px;
+}
+.sidr label {
+  font-size: -1em;
+}
+.sidr input[type="text"],
+.sidr input[type="password"],
+.sidr input[type="date"],
+.sidr input[type="datetime"],
+.sidr input[type="email"],
+.sidr input[type="number"],
+.sidr input[type="search"],
+.sidr input[type="tel"],
+.sidr input[type="time"],
+.sidr input[type="url"],
+.sidr textarea, .sidr select {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  clear: both;
+  color: rgba(255, 255, 255, 0.6);
+  display: block;
+  font-size: -1em;
+  margin: 0 0 10px;
+  padding: 5px;
+  width: 100%;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sidr input[type=checkbox] {
+  clear: none;
+  display: inline;
+  width: auto;
+}
+.sidr input[type=button],
+.sidr input[type=submit] {
+  background: #FFF;
+  color: #232326;
+}
+.sidr input[type=button]:hover,
+.sidr input[type=submit]:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/*----------------------HEADER----------------------*/
+.ngs-header {
+  border: none;
+  float: right;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.ngs-header.JS-sidr {
+  /* this class should exist only when responsive */
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.ngs-header.logged_in .navbar-toggle-wide {
+  cursor: pointer;
+  min-width: 10em;
+  padding-top: .625em;
+  padding-right: 1em;
+}
+.ngs-header.logged_in .navbar-toggle-wide ul {
+  background-color: #FFF;
+  box-shadow: 0 0 5px #555;
+  color: #FFF;
+  display: none;
+  list-style: none;
+  margin: 0 0 0 -0.1em;
+  padding: 3.125em 0 .6875em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.ngs-header.logged_out .navbar-toggle-wide a {
+  border: 1px solid #333;
+  border-radius: 4px 0 0 4px;
+  color: #999;
+  float: left;
+  font: 13px/1 "Helvetica", "Arial", sans-serif;
+  margin-top: .846em;
+  padding: .5385em .923em .462em;
+  text-decoration: none;
+}
+.ngs-header.logged_out .navbar-toggle-wide a.one-item-menu {
+  border: 1px solid #333;
+  border-radius: 4px !important;
+  margin-right: 4px;
+}
+.ngs-header.logged_out .navbar-toggle-wide a:last-of-type {
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+.ngs-header.logged_out .navbar-toggle-wide a:hover {
+  background-color: #333;
+  color: #FFF;
+}
+.ngs-header.logged_out .navbar-toggle-wide #join {
+  margin-right: 10px;
+}
+@media (min-width: 0) and (max-width: 985px) {
+  .ngs-header.logged_out.responsiveness {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+.ngs-header .navbar-toggle-wide #header_display_name {
+  color: #999;
+  display: block;
+  float: left;
+  font-size: .8125em;
+  line-height: 30px;
+  margin: 0 1.8em 0 1em;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.ngs-header .navbar-toggle-wide .menu_arrow {
+  background: none;
+  border-bottom: none;
+  border-left: .385em solid transparent;
+  border-right: .385em solid transparent;
+  border-top: .385em solid #999;
+  cursor: pointer;
+  height: 0;
+  margin: .85rem 0 0;
+  position: absolute;
+  right: .5rem;
+  width: 0;
+}
+.ngs-header .hidden {
+  display: none !important;
+}
+.ngs-header .badge {
+  background-color: #D65F35;
+  border-radius: .308em;
+  color: #FFF;
+  display: inline-block;
+  float: left;
+  font-size: .8125em;
+  height: 1.538em;
+  line-height: 1.538em;
+  margin: .5385em 1.154em 0 0;
+  text-align: center;
+  padding: 0 .462em;
+  position: relative;
+  text-decoration: none;
+  width: auto;
+}
+.ngs-header .badge.badge-inbox {
+  background-color: #DDD;
+  float: right;
+  margin-top: 0;
+  margin-right: 2.154em;
+}
+.ngs-header .badge.badge-inbox-mobile {
+  float: none;
+  margin: 0 .5em 0 0;
+}
+
+html.no-touch .ngs-header.logged_in:hover .navbar-toggle-wide ul,
+.ngs-header.logged_in .navbar-toggle-wide ul.opened {
+  display: block;
+}
+
+.ngs-header.logged_in
+.navbar-toggle-wide li {
+  border-bottom: 1px solid #EEE;
+}
+.ngs-header.logged_in
+.navbar-toggle-wide li a {
+  color: #000;
+  display: block;
+  float: none;
+  font: .93em/1 "Helvetica", "Arial", sans-serif;
+  padding: .571em 0 .751em 1.286em;
+  text-decoration: none;
+}
+.ngs-header.logged_in
+.navbar-toggle-wide li a:hover {
+  background-color: #EEE;
+}
+
+.ngs-header_img_link {
+  border: none;
+  float: left;
+  font: inherit;
+  margin: 0 0 .625em 1.125em;
+  padding: 0;
+  outline: none;
+}
+
+/* Honey Pot */
+.sec_h {
+  display: none;
+}
+
+/* styles for using icongs in mobile buttons */
+.header-menu-button {
+  border: 0 !important;
+  color: #fff !important;
+  float: left;
+  font-size: 12px;
+  margin: .1em 0;
+  padding: .5em 1em .1em !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  width: 32px !important;
+}
+.header-menu-button i.icongs {
+  float: none !important;
+  font-size: 24px;
+  padding: 0 !important;
+}
+.header-menu-button span {
+  font-size: .9em;
+  margin: .1em 0 0;
+  text-transform: uppercase;
+}
+.header-menu-button#mobile_join {
+  margin-top: 4px;
+}
+.header-menu-button#mobile_join span {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+.header-menu-button:hover {
+  background: transparent !important;
+  text-decoration: none;
+}
