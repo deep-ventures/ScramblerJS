@@ -1,5 +1,5 @@
 var Scrambler = function(element) {
-    this.iterations = 10;
+    this.iterations = 20;
     this.timeOut = 250;
     this.element = element;
     this.originalContent = null;
@@ -21,7 +21,12 @@ Scrambler.prototype = {
                 scrambler.scramble(true);
                 scrambler.run(scrambler);
             }, scrambler.timeOut);
+        } else {
+            scrambler.restore();
         };
+    },
+    restore: function() {
+        this.element.innerHTML = this.originalContent;
     },
     scrambleWord: function(word) {
         if (word.length > 3) {
@@ -55,10 +60,9 @@ Scrambler.prototype = {
                 }
             }
         }
-
         for (var i in this.scrambledWords) {
             if (randomize) {
-                if (randomIndices.indexOf(i) > -1) {
+                if (randomIndices.indexOf(Number(i)) > -1) {
                     this.scrambledWords[i] = this.scrambleWord(this.scrambledWords[i]);
                 }
             } else {
