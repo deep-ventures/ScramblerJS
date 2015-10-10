@@ -1,5 +1,5 @@
 var Scrambler = function(element, iterations) {
-    this.iterations = iterations || 20;
+    this.iterations = iterations || 100;
     this.timeOut = 250;
     this.element = element;
     this.originalContent = null;
@@ -21,12 +21,13 @@ Scrambler.prototype = {
                 scrambler.scramble(true);
                 scrambler.run(scrambler);
             }, scrambler.timeOut);
-        } else {
-            this.element.innerHTML = this.originalContent;
         };
     },
     stop: function() {
         this.iterations = 0;
+    },
+    restore: function() {
+        this.element.innerHTML = this.originalContent;
     },
     scrambleWord: function(word) {
         if (word.length > 3) {
@@ -90,6 +91,11 @@ ScramblerFactory.prototype = {
     stop: function() {
         for (var i = 0; i < this.scrambler.length; i++) {
             this.scrambler[i].stop();
+        }
+    },
+    restore: function() {
+        for (var i = 0; i < this.scrambler.length; i++) {
+            this.scrambler[i].restore();
         }
     }
 };

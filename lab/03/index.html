@@ -16,30 +16,70 @@ http://developers.theguardian.com/join-the-team.html
 --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <title>World news and comment from the Guardian | The Guardian</title>
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="lib/scrambler.js"></script>
     <script type="text/javascript">
+        function delay(time) {
+            return function () {
+                var ret = new $.Deferred();
+                setTimeout(function () {
+                    ret.resolve();
+                }, time);
+                return ret;
+            };
+        }
+
         var scramble = function() {
             var s1 = new ScramblerFactory('span.js-headline-text');
             var s2 = new ScramblerFactory('.fc-item__standfirst');
             var s3 = new ScramblerFactory('.top-navigation__action');
             var s4 = new ScramblerFactory('.local-navigation__action');
 
-            setTimeout(function() {
-                $( "#dialog" ).dialog({ width: 600, height: 300 }); 
-                s1.stop();              
-                s2.stop();              
-                s3.stop();              
-                s4.stop();
-                $(".natgeo_2nd").delay(2000).fadeIn();
-            }, 2000);
+            $.when()
+                .then(delay(2000))
+                .then(function() {
+                    s1.stop();
+                    s2.stop();
+                    s3.stop();
+                    s4.stop();
+                })
+                .then(delay(2000))
+                .then(function() {
+                    $( "#dialog" ).dialog({
+                        width: 600,
+                        height: 320,
+                        show: true,
+                        modal: true,
+                        close: function() {
+                            s1.restore();
+                            s2.restore();
+                            s3.restore();
+                            s4.restore();
+                            $(".natgeo_1st").hide();
+                            $(".natgeo_2nd").hide();
+                        }
+                    });
+                })
+                .then(delay(2000))
+                .then(function() {
+                    $(".natgeo_1st").fadeIn();
+                })
+                .then(delay(4000))
+                .then(function() {
+                    $(".natgeo_1st").fadeOut();
+                    $(".natgeo_2nd").delay(300).fadeIn();
+                });
         };
     </script>
     <style type="text/css">
-        .ui-widget { font-family: "Guardian Text Egyptian Web",Georgia,serif; }
+        .ui-widget { font-family: "DIN","Helvetica","Arial",sans-serif; }
+        .ui-dialog .ui-dialog-titlebar { padding: 0; }
+        .ui-dialog .ui-dialog-title { margin: 0; width: 100%; }
         .ui-widget-header { border: 0; background: #00456e; }
+        .ui-dialog-titlebar { font-family: "Passion One"; font-size: x-large; background-color: #ffd800; text-align: center; color: #00456e; }
         .ui-corner-all { border-radius: 0; }
         .ui-widget-content { border: 0; }
         .ui-dialog { padding: 0; }
@@ -106,7 +146,7 @@ http://developers.theguardian.com/join-the-team.html
 <meta name="twitter:url" content="http://www.theguardian.com/world">
 <meta property="og:title" content="World news and comment from the Guardian | The Guardian">
 <link rel="alternate" href="http://www.theguardian.com/world/rss" title="RSS" type="application/rss+xml">
-    
+
 	<!--<script src="https://assets.guim.co.uk/javascripts/components/html5shiv/53601738769ad38926a7dd48f3c4dfba/html5shiv.js"></script>-->
 <style class="js-loggable">
     .i,
@@ -149,7 +189,7 @@ http://developers.theguardian.com/join-the-team.html
     .no-svg .inline-observer-logo-320 { background-image: url(https://assets.guim.co.uk/images/logo/c5669a2096d808752b0d5798be09ab0f/observer-logo-320.png); }
 </style>
 <!--[if (lt IE 9)&(!IEMobile)]>
-    
+
 
 
     <link rel="stylesheet"  type="text/css" href="https://assets.guim.co.uk/stylesheets/d126a282d55aa9e08149d269242cc586/old-ie.head.facia.css" media="only x" />
@@ -158,7 +198,7 @@ http://developers.theguardian.com/join-the-team.html
     </noscript>
 
 
-    
+
 
 
     <link rel="stylesheet"  type="text/css" href="https://assets.guim.co.uk/stylesheets/6798806225acc0b29b6fa18b38751a96/old-ie.content.css" media="only x" />
@@ -169,7 +209,7 @@ http://developers.theguardian.com/join-the-team.html
 
 <![endif]-->
 <!--[if (IE 9)&(!IEMobile)]>
-    
+
 
 
     <link rel="stylesheet"  type="text/css" href="https://assets.guim.co.uk/stylesheets/629976f0ab59022db25d6f68fbe3f775/ie9.head.facia.css" media="only x" />
@@ -178,7 +218,7 @@ http://developers.theguardian.com/join-the-team.html
     </noscript>
 
 
-    
+
 
 
     <link rel="stylesheet"  type="text/css" href="https://assets.guim.co.uk/stylesheets/05e0fee05e27636ea5441bed5c39fc1a/ie9.content.css" media="only x" />
@@ -199,7 +239,7 @@ http://developers.theguardian.com/join-the-team.html
 </noscript>
 <!--<![endif]-->
 <link rel="stylesheet" media="print" type="text/css" href="./TheGuardian_files/print.css">
-    
+
 	<!--<script src="https://assets.guim.co.uk/javascripts/components/html5shiv/53601738769ad38926a7dd48f3c4dfba/html5shiv.js"></script>-->
 
 	<!--<script id="gu">if(!Function.prototype.bind){Function.prototype.bind=function(oThis){if(typeof this!=='function'){throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');}
@@ -223,7 +263,7 @@ if(window.location.hash==='#kern'){docClass+=' should-kern'}
 var baseFontSize=null;if('getComputedStyle'in window){baseFontSize=window.getComputedStyle(documentElement).getPropertyValue("font-size")}
 if(baseFontSize&&parseInt(baseFontSize,10)!==16){documentElement.style.fontSize=baseFontSize}
 documentElement.className=docClass.replace(/\bjs-off\b/g,'js-on');})(document.documentElement,window,navigator);window.s_account="guardiangu-frontend,guardiangu-network";</script>-->
-    
+
 	<!--<script>
       guardian.config.page.ajaxUrl = guardian.config.page.ajaxUrl.replace(/^https:/, '');
     </script>-->
@@ -276,9 +316,11 @@ if(guardian.isModernBrowser){require(['bootstraps/app'],function(bootstrap){boot
 	<!--<script type="text/javascript" src="./TheGuardian_files/osd.js"></script>-->
 </head>
 <body id="top" class="has-localnav wide-localnav" itemscope="" itemtype="http://schema.org/WebPage" data-pinterest-extension-installed="cr1.38.4" data-feedly-mini="yes">
-<div id="dialog" title="You can’t read this?" style="display: none;">
-  <p class="natgeo_1st">That’s how many girls around the world feel because they are not allowed to get an education.</p>
-  <p class="natgeo_2nd" style="display: none; ">Watch HE NAMED ME MALALA on NATIONAL GEOGRAPHIC and support the MALALA FUND.</p>
+<div id="dialog" title="YOU CAN’T READ THIS?" style="display: none;">
+  <!-- That’s how many girls around the world feel because they are not allowed to get an education. -->
+  <img src="assets/ng_1st.png" class="natgeo_1st" style="display: none;">
+  <!-- Watch HE NAMED ME MALALA on NATIONAL GEOGRAPHIC and support the MALALA FUND. -->
+  <img src="assets/ng_2nd.png" class="natgeo_2nd" style="display: none;">
 </div>
 	<!--<script type="text/javascript" src="./TheGuardian_files/741728839.js"></script>-->
 <div class="site-message js-site-message is-hidden" data-link-name="release message" role="dialog" aria-label="welcome" aria-describedby="site-message__message">
@@ -2653,11 +2695,10 @@ popular
 </ul>
 </div>
 <div id="tabs-popular-2" class="js-tab-2 modern-hidden tabs__pane u-cf" role="tabpanel" aria-labelledby="tabs-popular-2-tab" data-link-name="across the guardian" data-link-context="most-read/popular"><ul class="u-unstyled headline-list headline-list--large headline-column headline-column--tablet headline-column--desktop">
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="1 | text">
                                 <span class="headline-list__count">1</span>
-                                
 
 
 
@@ -2670,27 +2711,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/world/2015/sep/02/shocking-image-of-drowned-syrian-boy-shows-tragic-plight-of-refugees" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Shocking images of drowned Syrian boy show tragic plight of refugees</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="2 | text">
                                 <span class="headline-list__count">2</span>
-                                
 
 
 
@@ -2703,27 +2744,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/money/2015/sep/02/london-housing-crisis-480-a-month-for-a-bed-in-a-shed-in-the-lounge" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">London housing crisis: £480 a month for a bed, in a shed, in the lounge</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="3 | text">
                                 <span class="headline-list__count">3</span>
-                                
 
 
 
@@ -2736,27 +2777,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/society/ng-interactive/2015/sep/02/unaffordable-country-where-can-you-afford-to-buy-a-house" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Unaffordable country: where can you afford to buy a house?</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="4 | text">
                                 <span class="headline-list__count">4</span>
-                                
 
 
 
@@ -2769,27 +2810,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/music/musicblog/2015/sep/02/taylor-swift-wildest-dreams-video-colonial-african-fantasy" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Is Taylor Swift's colonial fantasy the beginning of the end?</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="5 | text">
                                 <span class="headline-list__count">5</span>
-                                
 
 
 
@@ -2802,27 +2843,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/uk-news/2015/sep/02/final-abuse-of-power-ex-chethams-pupils-vent-anger-at-chris-ling-suicide" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">'Final abuse of power': ex-Chetham's pupils vent anger at Chris Ling 'suicide'</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="6 | text">
                                 <span class="headline-list__count">6</span>
-                                
 
 
 
@@ -2835,27 +2876,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/society/2015/sep/02/girl-12-wins-maximum-mensa-iq-test-score" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Girl, 12, achieves maximum Mensa IQ test score</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="7 | text">
                                 <span class="headline-list__count">7</span>
-                                
 
 
 
@@ -2868,27 +2909,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/world/2015/sep/02/david-cameron-migration-crisis-will-not-be-solved-by-uk-taking-in-more-refugees" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">David Cameron: Britain 'should not take more Middle East refugees'</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="8 | text">
                                 <span class="headline-list__count">8</span>
-                                
 
 
 
@@ -2901,27 +2942,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/tv-and-radio/2015/sep/02/great-british-bake-off-sue-perkins-brain-tumour" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Sue Perkins, star of Great British Bake Off, tells of eight-year brain tumour</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="9 | text">
                                 <span class="headline-list__count">9</span>
-                                
 
 
 
@@ -2934,27 +2975,27 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/football/2015/sep/02/arsene-wenger-transfers-questions-80m-anthony-martial-deal" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Arsène Wenger defends lack of transfers and questions ‘€80m’ Martial deal</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                         <li class="headline-list__item headline-column__item headline-column--tablet__item headline-column--desktop__item tone-news--most-popular">
                             <div class="headline-list__link" data-link-name="10 | text">
                                 <span class="headline-list__count">10</span>
-                                
 
 
 
@@ -2967,23 +3008,24 @@ popular
 
 
 
-    
+
+
         <h2 class="fc-item__title"><a href="http://www.theguardian.com/uk-news/2015/sep/02/husband-clive-joy-morancho-wins-divorce-fight-car-collection" class="fc-item__link" data-link-name="article">
     <span class="headline-list__body fc-item__headline">
-    
-    
-    
-    
-    
+
+
+
+
+
  <span class="js-headline-text">Husband wins divorce fight over £20m car collection</span></span>
 </a></h2>
-    
+
 
 
 
                             </div>
                         </li>
-                    
+
                 </ul></div>
 <div class="fc-slice__popular-mpu js-fc-slice-mpu-candidate fc-slice__item--mpu-candidate"><div id="dfp-ad--inline2" class="js-ad-slot ad-slot ad-slot--dfp ad-slot--inline2 ad-slot--container-inline ad-slot--not-mobile" data-link-name="ad slot inline2" data-test-id="ad-slot-inline2" data-name="inline2" data-mobile="1,1|300,50" data-mobile-landscape="1,1|300,50|320,50" data-tablet="1,1|300,250" data-node-uid="44"></div></div>
 </div>
