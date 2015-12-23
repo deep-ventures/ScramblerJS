@@ -4,7 +4,6 @@
   "description": "a simple library to scramble words on a web page",
   "scripts": {
     "test": "gulp test",
-    "postinstall": "bower install",
     "build": "npm install && gulp build"
   },
   "repository": {
@@ -12,7 +11,7 @@
     "url": "git+https://github.com/grudelsud/ScramblerJS.git"
   },
   "keywords": [
-    "es6"
+    "js"
   ],
   "author": "grudelsud",
   "license": "MIT",
@@ -20,8 +19,4 @@
     "url": "https://github.com/grudelsud/ScramblerJS/issues"
   },
   "homepage": "https://github.com/grudelsud/ScramblerJS#readme",
-  "devDependencies": {
-    "babel": "^5.8.23",
-    "gulp": "^3.9.0"
-  }
 }
