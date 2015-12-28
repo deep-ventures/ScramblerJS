@@ -19,4 +19,11 @@
     "url": "https://github.com/grudelsud/ScramblerJS/issues"
   },
   "homepage": "https://github.com/grudelsud/ScramblerJS#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "dependencies": {
+    "alertify.js": "^1.0.8",
+    "jquery": "^2.1.4"
+  }
 }
