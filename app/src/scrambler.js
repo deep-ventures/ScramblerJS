@@ -2,10 +2,16 @@
 
     "use strict";
 
-    var textNodesUnder = function(el){
-        var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
-        while(n=walk.nextNode())
+    var textNodesUnder = function(el) {
+        var n,
+            a = [],
+            walk = document.createTreeWalker(
+                el,
+                NodeFilter.SHOW_TEXT);
+
+        while (n = walk.nextNode())
             a.push(n);
+
         return a;
     };
 
@@ -63,34 +69,71 @@
     };
 
     var ElementScrambler = function(element) {
-        console.log('[ElementScrambler] new', element);
+
         this.element = element || null;
-        this.originalContent = '';
+        if (element) {
+            this.originalContent = this.element.nodeValue;
+        } else {
+            this.originalContent = '';
+        }
     };
 
     ElementScrambler.prototype = {
 
         scramble: function(randomWords) {
-            this.element.innerHTML = scrambleParagraph(this.originalContent);
+            this.element.nodeValue = scrambleParagraph(this.originalContent, randomWords);
         },
 
         restore: function() {
-            this.element.innerHTML = this.originalContent;
+            this.element.nodeValue = this.originalContent;
         }
 
     };
 
     function Scrambler() {
 
+        var _defaultLocale = 'en';
         var _scrambler = {
             timeOut: 250,
-            iterations: 100,
+            running: false,
             scrambleElements: [],
 
-            scramble: function(element) {
+            init: function(element) {
                 var elements = textNodesUnder(element);
                 for (var e in elements) {
                     this.scrambleElements.push(new ElementScrambler(elements[e]));
+                }
+            },
+
+            run: function() {
+                console.log('[Scrambler] run', this.running);
+                if (this.running) {
+                    var scrambler = this;
+                    setTimeout(function() {
+                        scrambler.scramble();
+                        scrambler.run();
+                    }, scrambler.timeOut);
+                }
+            },
+
+            start: function() {
+                this.running = true;
+                this.run();
+            },
+
+            stop: function() {
+                this.running = false;
+            },
+
+            scramble: function() {
+                for (var es in this.scrambleElements) {
+                    this.scrambleElements[es].scramble();
+                }
+            },
+
+            restore: function() {
+                for (var es in this.scrambleElements) {
+                    this.scrambleElements[es].restore();
                 }
             }
         };
@@ -98,9 +141,15 @@
         // public interface
         return {
 
-            scramble: function(element) {
+            scramble: function(element, showCTA) {
+                // TODO: check that element is a real dom element
                 console.log('[Scrambler] scramble', element);
-                _scrambler.scramble(element);
+                _scrambler.init(element);
+                _scrambler.start();
+
+                if (showCTA) {
+                    this.showCTA(_defaultLocale);
+                }
                 return this;
             },
 
@@ -112,17 +161,59 @@
 
             restore: function() {
                 console.log('[Scrambler] restore');
+                _scrambler.restore();
                 return this;
             },
 
             showCTA: function(locale) {
                 console.log('[Scrambler] show CTA', locale);
+
+                function delay(time) {
+                    return function () {
+                        var ret = new $.Deferred();
+                        setTimeout(function () {
+                            ret.resolve();
+                        }, time);
+                        return ret;
+                    };
+                }
+
+                $.when()
+                    .then(delay(5000))
+                    .then(function() {
+                        _scrambler.stop();
+                        // TODO: load assets/data/copy.json with correct locale
+                    })
+                    .then(delay(2000))
+                    .then(function() {
+                        console.log('open empty dialog');
+                        // TODO: use alertify?
+                        alertify.alert('open empty dialog with title CTA');
+                    })
+                    .then(delay(2000))
+                    .then(function() {
+                        console.log('fade in 1st message');
+                        // TODO: here we should replace prev message
+                        alertify.alert('fade in 1st message');
+                    })
+                    .then(delay(4000))
+                    .then(function() {
+                        console.log('fade out 1st message');
+                        console.log('fade in 2nd message');
+                        _scrambler.restore();
+                    });
+
                 return this;
             },
 
-            go: function(element, locale) {
+            go: function(locale) {
                 // wrapper method, calls the whole sequence: scramble + stop + cta + restore
-                console.log('[Scrambler] go', element, locale);
+                console.log('[Scrambler] go', locale);
+                if (locale) {
+                    _defaultLocale = locale;
+                }
+                var body = document.getElementsByTagName('body')[0];
+                this.scramble(body, true);
                 return this;
             }
         };

@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/grudelsud/ScramblerJS#readme",
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
   },
   "dependencies": {
-    "alertify.js": "^1.0.8",
-    "jquery": "^2.1.4"
+    "alertify.js": "^1.0.8"
   }
 }

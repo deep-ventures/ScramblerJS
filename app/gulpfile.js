@@ -1,7 +1,9 @@
 var gulp = require("gulp");
+var concat = require("gulp-concat");
 
 var paths = {
     src: [
+        "node_modules/alertify.js/dist/js/alertify.js",
         "src/**/*.js"
     ],
     out: "build"
@@ -10,6 +12,7 @@ var paths = {
 gulp.task("build", function() {
     return gulp
         .src(paths.src)
+        .pipe(concat('scrambler.js'))
         .pipe(gulp.dest(paths.out));
 });
 
