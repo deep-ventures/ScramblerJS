@@ -1,5 +1,17 @@
-describe('scrambler unit tests', function() {
-    it('should sum 1 + 1', function() {
-        expect(1 + 1).toBe(2);
-    })
+describe('scrambler tests', function(){
+    beforeEach(function(){
+        fixture.setBase('fixtures')
+    });
+
+    beforeEach(function(){
+        this.sample = fixture.load('sample.html');
+    });
+
+    afterEach(function(){
+        fixture.cleanup()
+    });
+
+    it('plays with the html fixture', function(){
+        console.log(this.sample);
+    });
 });
