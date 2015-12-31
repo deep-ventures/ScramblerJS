@@ -1,6 +1,5 @@
 language: node_js
 node_js:
   - "4.1"
-  - "4.0"
 before_install: cd app
 before_script: npm install -g karma-cli
