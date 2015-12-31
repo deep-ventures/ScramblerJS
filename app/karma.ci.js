@@ -17,7 +17,8 @@ module.exports = function(config) {
         },
         sl_ios: {
             base: "SauceLabs",
-            browserName: "iphone"
+            browserName: "iphone",
+            version: "9.2"
         },
         sl_android: {
             base: "SauceLabs",
