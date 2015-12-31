@@ -1,5 +1,19 @@
 {
+  "default": {
+    "ngtv_url": "#",
+    "ngtv_img": "assets/img/empty.png"
+  },
   "en": {
-
+    "ngtv_title": "you can't read this?",
+    "ngtv_cta": [
+      {
+        "ngtv_url": "#",
+        "ngtv_img": "assets/img/en_01.png"
+      },
+      {
+        "ngtv_url": "#",
+        "ngtv_img": "assets/img/en_02.png"
+      }
+    ]
   }
 }
