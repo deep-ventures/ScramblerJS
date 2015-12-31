@@ -76,12 +76,17 @@ module.exports = function(config) {
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_DEBUG,
+        logLevel: config.LOG_INFO,
 
 
         sauceLabs: {
             testName: 'ScramblerJS Unit Tests',
         },
+
+        captureTimeout: 120000,
+        browserNoActivityTimeout: 100000,
+        browserDisconnectTimeout: 2000,
+        browserDisconnectTolerance: 3,
 
         customLaunchers: customLaunchers,
         browsers: Object.keys(customLaunchers),
