@@ -25,6 +25,7 @@ gulp.task("karma:tdd", function (done) {
     new Karma({
         configFile: __dirname + "/karma.conf.js"
     }, done).start();
+});
 
 gulp.task("assets", function() {
     return gulp
