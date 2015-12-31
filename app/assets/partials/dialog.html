@@ -1,17 +1,95 @@
-<div class="dialog" style="display: none;">
-    <div class="title">
-        <p>{{ title }}</p>
-    </div>
-    <div class="content">
-        <div class="msg_1" style="display: none;">
-            <a href="{{ cta_url }}">
-                <img src="{{ cta_img }}" alt="{{ cta_msg }}">
-            </a>
-        </div>
-        <div class="msg_2" style="display: none;">
-            <a href="{{ cta_url }}">
-                <img src="{{ cta_img }}" alt="{{ cta_msg }}">
+<div class="dialog">
+    <div class="wrapper">
+        <!-- title -->
+        <div class="ngtv_title"></div>
+        <!-- CTA & dismiss -->
+        <div class="ngtv_cta">
+            <a class="ok ngtv_url" href="#">
+                <img class="ngtv_img" src="">
             </a>
         </div>
     </div>
+    <style>
+        .ngtv {
+          position: fixed;
+          background-color: rgba(0, 0, 0, 0.3);
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 99999; }
+          .ngtv.hide {
+            opacity: 0;
+            pointer-events: none; }
+          .ngtv, .ngtv.show {
+            box-sizing: border-box;
+            -webkit-transition: all 0.33s cubic-bezier(0.25, 0.8, 0.25, 1);
+                    transition: all 0.33s cubic-bezier(0.25, 0.8, 0.25, 1); }
+          .ngtv, .ngtv * {
+            box-sizing: border-box; }
+          .ngtv .dialog {
+            padding: 12px; }
+          .ngtv .dialog, .ngtv .alert {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                    transform: translateY(-50%); }
+            .ngtv .dialog > *, .ngtv .alert > * {
+              width: 400px;
+              max-width: 95%;
+              margin: 0 auto;
+              text-align: center;
+              padding: 12px;
+              background: #fff;
+              box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084); }
+            .ngtv .dialog .msg, .ngtv .alert .msg {
+              padding: 12px;
+              margin-bottom: 12px;
+              margin: 0;
+              text-align: left; }
+            .ngtv .dialog input:not(.form-control), .ngtv .alert input:not(.form-control) {
+              margin-bottom: 15px;
+              width: 100%;
+              font-size: 100%;
+              padding: 12px; }
+              .ngtv .dialog input:not(.form-control):focus, .ngtv .alert input:not(.form-control):focus {
+                outline-offset: -2px; }
+            .ngtv .dialog nav, .ngtv .alert nav {
+              text-align: right; }
+              .ngtv .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button), .ngtv .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
+                background: transparent;
+                box-sizing: border-box;
+                color: rgba(0, 0, 0, 0.87);
+                position: relative;
+                outline: 0;
+                border: 0;
+                display: inline-block;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                padding: 0 6px;
+                margin: 6px 8px;
+                line-height: 36px;
+                min-height: 36px;
+                white-space: nowrap;
+                min-width: 88px;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 14px;
+                text-decoration: none;
+                cursor: pointer;
+                border-radius: 2px; }
+                .ngtv .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover, .ngtv .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active, .ngtv .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover, .ngtv .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active {
+                  background-color: rgba(0, 0, 0, 0.05); }
+                .ngtv .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus, .ngtv .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus {
+                  border: 1px dashed rgba(0, 0, 0, 0.1); }
+              .ngtv .dialog nav button.btn, .ngtv .alert nav button.btn {
+                margin: 6px 4px; }
+    </style>
 </div>

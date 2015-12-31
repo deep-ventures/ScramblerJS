@@ -4,6 +4,9 @@ var Karma = require("karma").Server;
 
 
 var paths = {
+    assets: [
+        "assets/**/*"
+    ],
     src: [
         "node_modules/alertify.js/dist/js/alertify.js",
         "src/**/*.js"
@@ -22,6 +25,11 @@ gulp.task("karma:tdd", function (done) {
     new Karma({
         configFile: __dirname + "/karma.conf.js"
     }, done).start();
+
+gulp.task("assets", function() {
+    return gulp
+        .src(paths.assets)
+        .pipe(gulp.dest(paths.out + "/assets"));
 });
 
 gulp.task("build", function() {
@@ -32,8 +40,10 @@ gulp.task("build", function() {
 });
 
 gulp.task("watch", function() {
+    gulp.watch(paths.assets, ["assets"]);
     gulp.watch(paths.src, ["build"]);
 });
 
 gulp.task("test", ["karma:ci"]);
-gulp.task("default", ["karma:tdd", "watch"]);
+
+gulp.task("default", ["assets", "build", "karma:tdd", "watch"]);

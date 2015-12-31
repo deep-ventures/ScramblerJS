@@ -2,6 +2,17 @@
 
     "use strict";
 
+    var delay = function(time) {
+        console.log('waiting a few ms...', time);
+        return function () {
+            var ret = new $.Deferred();
+            setTimeout(function () {
+                ret.resolve();
+            }, time);
+            return ret;
+        };
+    };
+
     var textNodesUnder = function(el) {
         var n,
             a = [],
@@ -100,6 +111,11 @@
             running: false,
             scrambleElements: [],
 
+            localizedCopy: {},
+            defaultCTA: {},
+            dialog: null,
+            dialogTemplate: "",
+
             init: function(element) {
                 var elements = textNodesUnder(element);
                 for (var e in elements) {
@@ -137,6 +153,67 @@
                 for (var es in this.scrambleElements) {
                     this.scrambleElements[es].restore();
                 }
+            },
+
+            updateCTA: function(url, img) {
+                _scrambler.dialog.querySelector(".ngtv_url").setAttribute('href', url);
+                _scrambler.dialog.querySelector(".ngtv_img").setAttribute('src', img);
+            },
+
+            initCTA: function(locale) {
+                // load copy deck and set locale
+                $.get('assets/data/copy.json', function(data) {
+
+                    var locale = locale || _defaultLocale;
+                    _scrambler.localizedCopy = data[locale];
+                    _scrambler.defaultCTA = data.default;
+
+                    console.log('copy deck loaded', locale, _scrambler.localizedCopy);
+
+                    // load dialog template
+                    $.get('assets/partials/dialog.html', function(data) {
+
+                        _scrambler.dialogTemplate = data;
+                        console.log('template loaded', _scrambler.dialogTemplate);
+
+                        _scrambler.dialog = document.createElement("div");
+                        _scrambler.dialog.className = "ngtv";
+                        _scrambler.dialog.innerHTML = _scrambler.dialogTemplate;
+                        _scrambler.dialog.querySelector(".ngtv_title").innerHTML = _scrambler.localizedCopy.ngtv_title;
+
+                        _scrambler.updateCTA(_scrambler.defaultCTA.ngtv_url, _scrambler.defaultCTA.ngtv_img);
+                    });
+
+                });
+            },
+
+            showCTA: function(locale) {
+                $.when()
+                    .then(function() {
+                        _scrambler.initCTA(locale);
+                    })
+                    .then(delay(500))
+                    // .then(delay(5000))
+                    .then(function() {
+                        _scrambler.stop();
+                    })
+                    .then(delay(2000))
+                    .then(function() {
+                        console.log('open empty dialog');
+                        // TODO: open empty dialog with title CTA
+                        document.body.appendChild(_scrambler.dialog);
+                    })
+                    .then(delay(2000))
+                    .then(function() {
+                        console.log('fade in 1st message');
+                    })
+                    .then(delay(4000))
+                    .then(function() {
+                        console.log('fade out 1st message');
+                        console.log('fade in 2nd message');
+                        _scrambler.restore();
+                    });
+
             }
         };
 
@@ -170,42 +247,7 @@
 
             showCTA: function(locale) {
                 console.log('[Scrambler] show CTA', locale);
-
-                function delay(time) {
-                    return function () {
-                        var ret = new $.Deferred();
-                        setTimeout(function () {
-                            ret.resolve();
-                        }, time);
-                        return ret;
-                    };
-                }
-
-                $.when()
-                    .then(delay(5000))
-                    .then(function() {
-                        _scrambler.stop();
-                        // TODO: load assets/data/copy.json with correct locale
-                    })
-                    .then(delay(2000))
-                    .then(function() {
-                        console.log('open empty dialog');
-                        // TODO: use alertify?
-                        alertify.alert('open empty dialog with title CTA');
-                    })
-                    .then(delay(2000))
-                    .then(function() {
-                        console.log('fade in 1st message');
-                        // TODO: here we should replace prev message
-                        alertify.alert('fade in 1st message');
-                    })
-                    .then(delay(4000))
-                    .then(function() {
-                        console.log('fade out 1st message');
-                        console.log('fade in 2nd message');
-                        _scrambler.restore();
-                    });
-
+                _scrambler.showCTA(locale);
                 return this;
             },
 
