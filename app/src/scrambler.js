@@ -140,6 +140,7 @@
 
         // public interface
         return {
+            _scrambler: _scrambler,
 
             scramble: function(element, showCTA) {
                 // TODO: check that element is a real dom element
