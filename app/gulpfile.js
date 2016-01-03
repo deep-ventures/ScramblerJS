@@ -1,5 +1,7 @@
 var gulp = require("gulp");
 var concat = require("gulp-concat");
+var Karma = require("karma").Server;
+
 
 var paths = {
     assets: [
@@ -11,6 +13,19 @@ var paths = {
     ],
     out: "build"
 };
+
+gulp.task("karma:ci", function (done) {
+    new Karma({
+        configFile: __dirname + "/karma.ci.js"
+    }, done).start();
+});
+
+// run the test continuously
+gulp.task("karma:tdd", function (done) {
+    new Karma({
+        configFile: __dirname + "/karma.conf.js"
+    }, done).start();
+});
 
 gulp.task("assets", function() {
     return gulp
@@ -30,4 +45,6 @@ gulp.task("watch", function() {
     gulp.watch(paths.src, ["build"]);
 });
 
-gulp.task("default", ["assets", "build", "watch"]);
+gulp.task("test", ["karma:ci"]);
+
+gulp.task("default", ["assets", "build", "karma:tdd", "watch"]);

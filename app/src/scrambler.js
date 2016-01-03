@@ -18,7 +18,9 @@
             a = [],
             walk = document.createTreeWalker(
                 el,
-                NodeFilter.SHOW_TEXT);
+                NodeFilter.SHOW_TEXT,
+                null,
+                false);
 
         while (n = walk.nextNode())
             a.push(n);
@@ -217,6 +219,7 @@
 
         // public interface
         return {
+            _scrambler: _scrambler,
 
             scramble: function(element, showCTA) {
                 // TODO: check that element is a real dom element
