@@ -9,17 +9,29 @@
 <body>
     <div class="container">
         <div class="column">
+
+            <!-- quick and dirty -->
             <h1>For the impatients</h1>
             <ol>
-                <li>just run the presets passing a locale for the CTA: <span>scrambler.go('en')</span></li>
+                <li>add the scrambler.js and jquery libraries to the page you want to scramble</li>
+                <li>then run the presets passing a locale for the CTA: <span>scrambler.go('en')</span></li>
             </ol>
+            <p>this operation will scramble all text nodes under the main body element and show the CTA after a preset interval.</p>
+
+            <!-- detailed usage -->
             <h1>How to use the scrambler</h1>
+            <p>the scrambler can run manually by calling each individual function exposed by the library:</p>
             <ol>
-                <li>select a DOM element: <span>b = document.querySelector('body')</span></li>
-                <li>initialize and start the scrambler: <span>scrambler.scramble(b)</span></li>
+                <li>add the scrambler.js and jquery libraries to the page you want to scramble</li>
+                <li>select the root element that needs to be scrambled, e.g.: <span>el = document.querySelector('.article')</span></li>
+                <li>initialize and start the scrambler: <span>scrambler.scramble(el)</span>. Note! the CTA at the end of the scrambling (read below) can be shown automatically by passing a boolean parameter, e.g. <span>scrambler.scramble(el, true)</span></li>
                 <li>stop the scrambler: <span>scrambler.stop()</span></li>
+                <li>show the CTA passing a locale: <span>scrambler.showCTA('en')</span></li>
                 <li>restore the original text: <span>scrambler.restore()</span></li>
             </ol>
+            <p>NOTE 1. The scrambler can work without jquery. Jquery is only used to show the CTA with defined timings and localized copy.</p>
+            <p>Note 2. All the copy elements are defined in file copy.json.</p>
+
         </div>
         <div class="column">
             <h2>Sample text</h2>

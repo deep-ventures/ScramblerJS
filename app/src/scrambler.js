@@ -3,7 +3,7 @@
     "use strict";
 
     var delay = function(time) {
-        console.log('waiting a few ms...', time);
+        console.log('[delay]', time);
         return function () {
             var ret = new $.Deferred();
             setTimeout(function () {
@@ -156,32 +156,48 @@
             },
 
             updateCTA: function(url, img) {
-                _scrambler.dialog.querySelector(".ngtv_url").setAttribute('href', url);
-                _scrambler.dialog.querySelector(".ngtv_img").setAttribute('src', img);
+                if (_scrambler.dialog) {
+                    _scrambler.dialog.querySelector(".scrambler_url").setAttribute('href', url);
+                    _scrambler.dialog.querySelector(".scrambler_img").setAttribute('src', img);
+                }
             },
 
-            initCTA: function(locale) {
-                // load copy deck and set locale
+            _hideCTA: function() {
+                if(_scrambler.dialog) {
+                    document.body.removeChild(_scrambler.dialog);
+                    _scrambler.dialog = null;
+                }
+            },
+
+            _initCTA: function(locale) {
+                // load copy deck
                 $.get('assets/data/copy.json', function(data) {
 
+                    // set localized copy and default values
                     var locale = locale || _defaultLocale;
                     _scrambler.localizedCopy = data[locale];
                     _scrambler.defaultCTA = data.default;
 
-                    console.log('copy deck loaded', locale, _scrambler.localizedCopy);
+                    console.log('[Scrambler] copy deck loaded', locale, _scrambler.localizedCopy);
 
                     // load dialog template
                     $.get('assets/partials/dialog.html', function(data) {
 
                         _scrambler.dialogTemplate = data;
-                        console.log('template loaded', _scrambler.dialogTemplate);
+                        console.log('[Scrambler] template loaded', _scrambler.dialogTemplate);
 
+                        // create scrambler cta container
                         _scrambler.dialog = document.createElement("div");
-                        _scrambler.dialog.className = "ngtv";
+                        _scrambler.dialog.className = "scrambler";
                         _scrambler.dialog.innerHTML = _scrambler.dialogTemplate;
-                        _scrambler.dialog.querySelector(".ngtv_title").innerHTML = _scrambler.localizedCopy.ngtv_title;
 
-                        _scrambler.updateCTA(_scrambler.defaultCTA.ngtv_url, _scrambler.defaultCTA.ngtv_img);
+                        // set dialog localized copy
+                        _scrambler.dialog.querySelector(".scrambler_title").innerHTML = _scrambler.localizedCopy.scrambler_title;
+                        _scrambler.updateCTA(_scrambler.defaultCTA.scrambler_url, _scrambler.defaultCTA.scrambler_img);
+
+                        var closeHandler = _scrambler.dialog.querySelector(".scrambler_close");
+                        closeHandler.innerHTML = _scrambler.localizedCopy.scrambler_close;
+                        closeHandler.addEventListener('click', _scrambler.destroy, true);
                     });
 
                 });
@@ -190,30 +206,35 @@
             showCTA: function(locale) {
                 $.when()
                     .then(function() {
-                        _scrambler.initCTA(locale);
+                        _scrambler._initCTA(locale);
                     })
-                    .then(delay(500))
-                    // .then(delay(5000))
+                    // .then(delay(500)) // test, comment 5000
+                    .then(delay(5000))
                     .then(function() {
                         _scrambler.stop();
                     })
                     .then(delay(2000))
                     .then(function() {
-                        console.log('open empty dialog');
-                        // TODO: open empty dialog with title CTA
                         document.body.appendChild(_scrambler.dialog);
                     })
                     .then(delay(2000))
                     .then(function() {
-                        console.log('fade in 1st message');
+                        var url = _scrambler.localizedCopy.scrambler_cta[0].scrambler_url;
+                        var img = _scrambler.localizedCopy.scrambler_cta[0].scrambler_img;
+                        _scrambler.updateCTA(url, img)
                     })
                     .then(delay(4000))
                     .then(function() {
-                        console.log('fade out 1st message');
-                        console.log('fade in 2nd message');
-                        _scrambler.restore();
+                        var url = _scrambler.localizedCopy.scrambler_cta[1].scrambler_url;
+                        var img = _scrambler.localizedCopy.scrambler_cta[1].scrambler_img;
+                        _scrambler.updateCTA(url, img);
                     });
+            },
 
+            destroy: function() {
+                _scrambler._hideCTA();
+                _scrambler.restore();
+                _scrambler.scrambleElements = [];
             }
         };
 
@@ -241,7 +262,7 @@
 
             restore: function() {
                 console.log('[Scrambler] restore');
-                _scrambler.restore();
+                _scrambler.destroy();
                 return this;
             },
 
@@ -257,8 +278,7 @@
                 if (locale) {
                     _defaultLocale = locale;
                 }
-                var body = document.getElementsByTagName('body')[0];
-                this.scramble(body, true);
+                this.scramble(document.querySelector('body'), true);
                 return this;
             }
         };

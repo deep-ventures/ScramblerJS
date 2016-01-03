@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/grudelsud/ScramblerJS#readme",
   "devDependencies": {
+    "alertify.js": "^1.0.8",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "jasmine-core": "^2.4.1",
@@ -33,8 +34,5 @@
     "karma-jasmine": "^0.3.6",
     "karma-safari-launcher": "^0.1.1",
     "karma-sauce-launcher": "^0.3.0"
-  },
-  "dependencies": {
-    "alertify.js": "^1.0.8"
   }
 }

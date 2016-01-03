@@ -2,13 +2,11 @@ var gulp = require("gulp");
 var concat = require("gulp-concat");
 var Karma = require("karma").Server;
 
-
 var paths = {
     assets: [
         "assets/**/*"
     ],
     src: [
-        "node_modules/alertify.js/dist/js/alertify.js",
         "src/**/*.js"
     ],
     out: "build"
