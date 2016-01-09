@@ -59,4 +59,21 @@ describe('scrambler tests', function(){
 
         expect(scrambler._scrambler.running).toEqual(false);
     });
+
+    it('restores the original content', function() {
+        var originalContent = removeWhitespace(this.sample[0].textContent);
+
+        jasmine.clock().install();
+
+        scrambler.scramble(this.sample[0], false);
+
+        jasmine.clock().tick(501);
+
+        expect(originalContent).not.toEqual(removeWhitespace(this.sample[0].textContent))
+
+        scrambler.restore();
+
+        expect(originalContent).toEqual(removeWhitespace(this.sample[0].textContent))
+        jasmine.clock().uninstall();
+    });
 });
