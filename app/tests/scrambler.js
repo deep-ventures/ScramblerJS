@@ -9,26 +9,27 @@ describe('scrambler tests', function(){
 
     beforeEach(function(){
         this.sample = fixture.load('sample.html');
-
-        runSpy = spyOn(scrambler._scrambler, "run").and.callThrough();
-        jasmine.clock().install();
     });
 
     afterEach(function() {
         fixture.cleanup();
-        jasmine.clock().uninstall();
     });
 
     it('plays with the html fixture', function() {
+        jasmine.clock().install();
+
+        var runSpy = spyOn(scrambler._scrambler, "run").and.callThrough();
         var originalContent = removeWhitespace(this.sample[0].textContent);
 
         scrambler.scramble(this.sample[0], false);
-
         expect(runSpy.calls.count()).toEqual(1);
+
         jasmine.clock().tick(501);
         expect(runSpy.calls.count()).toEqual(3);
 
         expect(originalContent).not.toEqual(removeWhitespace(this.sample[0].textContent))
+
+        jasmine.clock().uninstall();
     });
 
     it('defaults on body when calling the go function', function() {
