@@ -272,13 +272,19 @@
                 return this;
             },
 
-            go: function(locale) {
+            go: function(locale, element) {
                 // wrapper method, calls the whole sequence: scramble + stop + cta + restore
                 console.log('[Scrambler] go', locale);
                 if (locale) {
                     _defaultLocale = locale;
                 }
-                this.scramble(document.querySelector('body'), true);
+
+                if (!element) {
+                    element = document.querySelector('body');
+                }
+
+                this.scramble(element, true);
+
                 return this;
             }
         };

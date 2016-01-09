@@ -24,4 +24,22 @@ describe('scrambler tests', function(){
 
         // TODO: check if the text has been scrambled
     });
+
+    it('defaults on body when calling the go function', function() {
+        var scramblerSpy = spyOn(scrambler, "scramble");
+
+        scrambler.go('en');
+
+        expect(scramblerSpy.calls.count()).toEqual(1);
+        expect(scramblerSpy).toHaveBeenCalledWith(document.querySelector('body'), true);
+    });
+
+    it('the go function accepts a custom element', function() {
+        var scramblerSpy = spyOn(scrambler, "scramble");
+
+        scrambler.go('en', this.sample[0]);
+
+        expect(scramblerSpy.calls.count()).toEqual(1);
+        expect(scramblerSpy).toHaveBeenCalledWith(this.sample[0], true);
+    });
 });
