@@ -1,3 +1,7 @@
+function removeWhitespace(string) {
+    return string.replace(/\s+/g, '');
+}
+
 describe('scrambler tests', function(){
     beforeEach(function() {
         fixture.setBase('fixtures')
@@ -16,13 +20,15 @@ describe('scrambler tests', function(){
     });
 
     it('plays with the html fixture', function() {
+        var originalContent = removeWhitespace(this.sample[0].textContent);
+
         scrambler.scramble(this.sample[0], false);
 
         expect(runSpy.calls.count()).toEqual(1);
         jasmine.clock().tick(501);
         expect(runSpy.calls.count()).toEqual(3);
 
-        // TODO: check if the text has been scrambled
+        expect(originalContent).not.toEqual(removeWhitespace(this.sample[0].textContent))
     });
 
     it('defaults on body when calling the go function', function() {
