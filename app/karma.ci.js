@@ -37,7 +37,7 @@ module.exports = function(config) {
         sl_ie_10: {
             base: 'SauceLabs',
             browserName: 'internet explorer',
-            version: '9'
+            version: '10'
         },
         sl_ie_9: {
             base: 'SauceLabs',
