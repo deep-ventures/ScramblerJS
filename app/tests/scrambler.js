@@ -49,4 +49,14 @@ describe('scrambler tests', function(){
         expect(scramblerSpy.calls.count()).toEqual(1);
         expect(scramblerSpy).toHaveBeenCalledWith(this.sample[0], true);
     });
+
+    it('stops the scrambling', function() {
+        scrambler.scramble(this.sample[0], false);
+
+        expect(scrambler._scrambler.running).toEqual(true);
+
+        scrambler.stop();
+
+        expect(scrambler._scrambler.running).toEqual(false);
+    });
 });
