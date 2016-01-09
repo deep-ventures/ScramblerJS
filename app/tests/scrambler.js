@@ -61,7 +61,7 @@ describe('scrambler tests', function(){
     });
 
     it('restores the original content', function() {
-        var originalContent = removeWhitespace(this.sample[0].textContent);
+        var originalContent = this.sample[0].innerHTML;
 
         jasmine.clock().install();
 
@@ -69,11 +69,12 @@ describe('scrambler tests', function(){
 
         jasmine.clock().tick(501);
 
-        expect(originalContent).not.toEqual(removeWhitespace(this.sample[0].textContent))
+        expect(originalContent).not.toEqual(this.sample[0].innerHTML);
 
         scrambler.restore();
 
-        expect(originalContent).toEqual(removeWhitespace(this.sample[0].textContent))
+        expect(originalContent).toEqual(this.sample[0].innerHTML);
+
         jasmine.clock().uninstall();
     });
 });
