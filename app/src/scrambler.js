@@ -13,6 +13,18 @@
         };
     };
 
+    var getTextContent = function(node) {
+        return node.nodeValue;
+    };
+
+    var setTextContent = function(node, text) {
+        if (node.nodeValue.length == 0) {
+            return;
+        }
+
+        node.nodeValue = text;
+    };
+
     var textNodesUnder = function(el) {
         var n,
             a = [],
@@ -85,7 +97,7 @@
 
         this.element = element || null;
         if (element) {
-            this.originalContent = this.element.nodeValue;
+            this.originalContent = getTextContent(this.element);
         } else {
             this.originalContent = '';
         }
@@ -94,11 +106,11 @@
     ElementScrambler.prototype = {
 
         scramble: function(randomWords) {
-            this.element.nodeValue = scrambleParagraph(this.originalContent, randomWords);
+            setTextContent(this.element, scrambleParagraph(this.originalContent, randomWords));
         },
 
         restore: function() {
-            this.element.nodeValue = this.originalContent;
+            setTextContent(this.element, this.originalContent);
         }
 
     };
