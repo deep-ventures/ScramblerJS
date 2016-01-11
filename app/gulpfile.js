@@ -1,5 +1,7 @@
 var gulp = require("gulp");
 var concat = require("gulp-concat");
+var uglify = require('gulp-uglify');
+
 var Karma = require("karma").Server;
 
 var paths = {
@@ -35,6 +37,7 @@ gulp.task("build", function() {
     return gulp
         .src(paths.src)
         .pipe(concat('scrambler.js'))
+        .pipe(uglify({mangle: false}))
         .pipe(gulp.dest(paths.out));
 });
 
@@ -45,4 +48,6 @@ gulp.task("watch", function() {
 
 gulp.task("test", ["karma:ci"]);
 
-gulp.task("default", ["assets", "build", "karma:tdd", "watch"]);
+gulp.task("build-all", ["assets", "build"]);
+
+gulp.task("default", ["build-all", "karma:tdd", "watch"]);
