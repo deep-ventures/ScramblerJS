@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var concat = require("gulp-concat");
 var uglify = require('gulp-uglify');
+var coveralls = require('gulp-coveralls');
 
 var Karma = require("karma").Server;
 
@@ -46,7 +47,13 @@ gulp.task("watch", function() {
     gulp.watch(paths.src, ["build"]);
 });
 
-gulp.task("test", ["karma:ci"]);
+
+gulp.task("coveralls", function() {
+    return gulp.src('coverage/**/lcov.info')
+        .pipe(coveralls());
+});
+
+gulp.task("test", ["karma:ci", "coveralls"]);
 
 gulp.task("build-all", ["assets", "build"]);
 
