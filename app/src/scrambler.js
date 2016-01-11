@@ -18,7 +18,7 @@
     };
 
     var setTextContent = function(node, text) {
-        if (node.nodeValue.length == 0) {
+        if (typeof node.nodeValue == 'unknown' || node.nodeValue.length == 0) {
             return;
         }
 
