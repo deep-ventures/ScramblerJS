@@ -48,12 +48,12 @@ gulp.task("watch", function() {
 });
 
 
-gulp.task("coveralls", function() {
+gulp.task("coveralls", ["karma:ci"], function() {
     return gulp.src('coverage/**/lcov.info')
         .pipe(coveralls());
 });
 
-gulp.task("test", ["karma:ci", "coveralls"]);
+gulp.task("test", ["coveralls"]);
 
 gulp.task("build-all", ["assets", "build"]);
 
