@@ -38,16 +38,16 @@ describe('scrambler tests', function(){
         scrambler.go('en');
 
         expect(scramblerSpy.calls.count()).toEqual(1);
-        expect(scramblerSpy).toHaveBeenCalledWith(document.querySelector('body'), true);
+        expect(scramblerSpy).toHaveBeenCalledWith(document.querySelector('body'), true, undefined);
     });
 
     it('the go function accepts a custom element', function() {
         var scramblerSpy = spyOn(scrambler, "scramble");
 
-        scrambler.go('en', this.sample[0]);
+        scrambler.go('en', '', this.sample[0]);
 
         expect(scramblerSpy.calls.count()).toEqual(1);
-        expect(scramblerSpy).toHaveBeenCalledWith(this.sample[0], true);
+        expect(scramblerSpy).toHaveBeenCalledWith(this.sample[0], true, '');
     });
 
     it('stops the scrambling', function() {
