@@ -41,20 +41,24 @@ open the `app/buil/demo.html` in a browser to run the example. The API can be us
 
 **2a. call the API**
 
-- select the root element that needs to be scrambled, e.g.: `el = document.querySelector('.article')` or `el = document.querySelector('body')` for the whole page
-- initialize and start the scrambler: `scrambler.scramble(el)` Note! the CTA at the end of the scrambling (read below) can be shown automatically by passing a boolean parameter, e.g. `scrambler.scramble(el, true)`
+- select the root element that needs to be scrambled, e.g.: `el = document.querySelector('body')` for the whole page or `el = document.querySelector('.article')` to select the first element of class `article`
+- initialize and start the scrambler: `scrambler.scramble(el)`
 - stop the scrambler: `scrambler.stop()`
-- show the CTA passing a locale: `scrambler.showCTA('en')`
+- show the CTA passing a locale: `scrambler.showCTA('en')` with an optional parameter to specify where to find the assets, e.g. `scrambler.shotCTA('en', 'http://www.example.com/scramblerjs/')`
 - restore the original text: `scrambler.restore()`
 
 **2b. quick launch**
 
-- the whole sequence `select body -> scramble -> stop -> show CTA -> restore` can be run by issuing the shortcut command `go` passing a locale for the CTA e.g.: `scrambler.go('en')`
+- the whole sequence `select body -> scramble -> stop -> show CTA -> restore` can be run by issuing the shortcut command `go`. The command accepts 3 optional parameters:
+    1. a locale for the CTA e.g.: `scrambler.go('en')`
+    2. a prefix for the CTA assets e.g.: `scrambler.go('en', 'http://www.example.com/scramblerjs/')`
+    3. the super element whose children will be scrambled, e.g. `scrambler.go('en', '', document.querySelector('body'))`
 
+**Note 1.** the CTA at the end of the scrambling can be shown automatically by passing a boolean parameter, e.g. `scrambler.scramble(el, true)` and also accepts the additional parameter to specify assets' prefix, e.g. `scrambler.scramble(el, true, 'http://www.example.com/scramblerjs/')`
 
-**Note 1.** The scrambler can work without jquery. Jquery is only used to show the CTA with defined timings and localized copy.
+**Note 2.** The scrambler can work without jquery. Jquery is only used to show the CTA with defined timings and localized copy.
 
-**Note 2.** All the copy elements and image references shown in the CTA are defined in file copy.json. To create a localized version (e.g. for a new locale) just copy the `en` object and give it a new prefix, then use the newly created prefix to run the CTA function, e.g. `scrambler.showCTA('fr')`
+**Note 3.** All the **copy elements and image references** shown in the CTA are defined in file copy.json. To create a localized version (e.g. for a new locale) just copy the `en` object and give it a new prefix, then use the newly created prefix to run the CTA function, e.g. `scrambler.showCTA('fr')`
 
 
 ## Development

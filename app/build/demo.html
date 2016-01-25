@@ -8,35 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="column">
-
-            <!-- quick and dirty -->
-            <h1>For the impatients</h1>
-            <ol>
-                <li>add the scrambler.js and jquery libraries to the page you want to scramble</li>
-                <li>then run the presets passing a locale for the CTA: <span>scrambler.go('en')</span></li>
-            </ol>
-            <p>this operation will scramble all text nodes under the main body element and show the CTA after a preset interval.</p>
-
-            <!-- detailed usage -->
-            <h1>How to use the scrambler</h1>
-            <p>the scrambler can run manually by calling each individual function exposed by the library:</p>
-            <ol>
-                <li>add the scrambler.js and jquery libraries to the page you want to scramble</li>
-                <li>select the root element that needs to be scrambled, e.g.: <span>el = document.querySelector('.article')</span></li>
-                <li>initialize and start the scrambler: <span>scrambler.scramble(el)</span>. Note! the CTA at the end of the scrambling (read below) can be shown automatically by passing a boolean parameter, e.g. <span>scrambler.scramble(el, true)</span></li>
-                <li>stop the scrambler: <span>scrambler.stop()</span></li>
-                <li>show the CTA passing a locale: <span>scrambler.showCTA('en')</span></li>
-                <li>restore the original text: <span>scrambler.restore()</span></li>
-            </ol>
-            <p>NOTE 1. The scrambler can work without jquery. Jquery is only used to show the CTA with defined timings and localized copy.</p>
-            <p>Note 2. All the copy elements are defined in file copy.json.</p>
-
-        </div>
-        <div class="column">
-            <h2>Sample text</h2>
-            <p>The <a href="http://www.quickbrownfox.com">quick brown fox</a> jumped over the lazy dog.</p>
-        </div>
+      <h1>Cold-pressed locavore etsy</h1>
+      <p>
+        <button type="button" name="button" onclick="scrambler.go('en')">Scramble</button>
+      </p>
+      <p>
+        Shabby chic chillwave godard bicycle rights cornhole hammock organic pop-up hella, retro tilde mumblecore. Street art stumptown letterpress next level, normcore actually austin authentic chia chambray retro meh vegan. Street art organic iPhone, selfies hoodie tofu irony wayfarers viral marfa bicycle rights lumbersexual poutine celiac. Mumblecore asymmetrical kickstarter, irony flexitarian +1 bespoke knausgaard hoodie yr dreamcatcher cliche. Mumblecore skateboard authentic, yr lumbersexual kale chips kogi artisan kombucha pour-over trust fund slow-carb. Organic marfa microdosing, hammock put a bird on it celiac kombucha affogato single-origin coffee tofu hella. Farm-to-table chia 90's, forage pitchfork marfa ramps tumblr.
+      </p>
+      <p>
+        Vegan echo park tilde, thundercats chambray polaroid gochujang kombucha. 8-bit XOXO bespoke mumblecore heirloom flexitarian mustache migas. Pinterest +1 bicycle rights pop-up, narwhal scenester tacos selvage microdosing wolf direct trade brooklyn street art yr meggings. Fap messenger bag freegan small batch, gochujang locavore shoreditch literally disrupt heirloom schlitz umami trust fund. Lomo street art jean shorts locavore. Gentrify small batch meh before they sold out raw denim beard farm-to-table. Vice cardigan green juice keffiyeh.
+      </p>
     </div>
 </body>
 </html>

@@ -57,4 +57,6 @@ gulp.task("test", ["coveralls"]);
 
 gulp.task("build-all", ["assets", "build"]);
 
-gulp.task("default", ["build-all", "karma:tdd", "watch"]);
+gulp.task("watch-tdd", ["build-all", "karma:tdd", "watch"]);
+
+gulp.task("default", ["build-all", "watch"]);
